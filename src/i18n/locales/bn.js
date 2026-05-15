@@ -21,6 +21,13 @@ export default {
   groceriesPets: 'মুদিখানা ও পোষা প্রাণী',
   healthBeauty: 'স্বাস্থ্য ও সৌন্দর্য',
 
+  // Login Page
+  loginTitle: 'DailyFresh-এ লগ ইন করুন',
+  forgotPassword: 'পাসওয়ার্ড ভুলে গেছেন?',
+  loginBtn: 'লগ ইন',
+  dontHaveAccount: 'অ্যাকাউন্ট নেই?',
+  loginWithGoogle: 'Google দিয়ে লগ ইন করুন',
+
   // Footer
   subscribe: 'সাবস্ক্রাইব করুন',
   subscribeDesc: 'প্রথম অর্ডারে ১০% ছাড় পান',

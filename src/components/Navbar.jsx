@@ -7,6 +7,7 @@ const navKeys = [
   { key: 'contact', tKey: 'contact', to: '/contact' },
   { key: 'about',   tKey: 'about',   to: '/about' },
   { key: 'signUp',  tKey: 'signUp',  to: '/signup' },
+  { key: 'logIn',   tKey: 'logIn',   to: '/login' },
 ];
 
 export default function Navbar() {

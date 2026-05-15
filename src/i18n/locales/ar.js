@@ -21,6 +21,13 @@ export default {
   groceriesPets: 'البقالة والحيوانات الأليفة',
   healthBeauty: 'الصحة والجمال',
 
+  // Login Page
+  loginTitle: 'تسجيل الدخول إلى DailyFresh',
+  forgotPassword: 'نسيت كلمة المرور؟',
+  loginBtn: 'تسجيل الدخول',
+  dontHaveAccount: 'ليس لديك حساب؟',
+  loginWithGoogle: 'تسجيل الدخول بواسطة Google',
+
   // Footer
   subscribe: 'اشترك',
   subscribeDesc: 'احصل على خصم 10% على طلبك الأول',

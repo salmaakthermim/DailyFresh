@@ -21,6 +21,13 @@ export default {
   groceriesPets: 'किराना और पालतू जानवर',
   healthBeauty: 'स्वास्थ्य और सौंदर्य',
 
+  // Login Page
+  loginTitle: 'DailyFresh में लॉग इन करें',
+  forgotPassword: 'पासवर्ड भूल गए?',
+  loginBtn: 'लॉग इन',
+  dontHaveAccount: 'अकाउंट नहीं है?',
+  loginWithGoogle: 'Google से लॉग इन करें',
+
   // Footer
   subscribe: 'सब्सक्राइब करें',
   subscribeDesc: 'पहले ऑर्डर पर 10% की छूट पाएं',

@@ -21,6 +21,13 @@ export default {
   groceriesPets: 'Groceries & Pets',
   healthBeauty: 'Health & Beauty',
 
+  // Login Page
+  loginTitle: 'Log in to DailyFresh',
+  forgotPassword: 'Forget Password?',
+  loginBtn: 'Log In',
+  dontHaveAccount: "Don't have an account?",
+  loginWithGoogle: 'Log in with Google',
+
   // Footer
   subscribe: 'Subscribe',
   subscribeDesc: 'Get 10% off your first order',
