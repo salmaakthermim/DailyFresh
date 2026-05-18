@@ -62,6 +62,7 @@ export default {
   emailRequired: 'ইমেইল বা ফোন আবশ্যক',
   passwordRequired: 'পাসওয়ার্ড আবশ্যক',
   passwordMin: 'পাসওয়ার্ড কমপক্ষে ৬ অক্ষরের হতে হবে',
+  photoUrl: 'ছবির URL (ঐচ্ছিক)',
 
   // Slides
   slide1Tag: '🥦 তাজা আগমন',

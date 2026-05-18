@@ -62,6 +62,7 @@ export default {
   emailRequired: 'البريد الإلكتروني أو الهاتف مطلوب',
   passwordRequired: 'كلمة المرور مطلوبة',
   passwordMin: 'يجب أن تكون كلمة المرور 6 أحرف على الأقل',
+  photoUrl: 'رابط الصورة (اختياري)',
 
   // Slides
   slide1Tag: '🥦 وصول جديد',

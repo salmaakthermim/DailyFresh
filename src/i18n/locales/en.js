@@ -62,6 +62,7 @@ export default {
   emailRequired: 'Email or phone is required',
   passwordRequired: 'Password is required',
   passwordMin: 'Password must be at least 6 characters',
+  photoUrl: 'Photo URL (optional)',
 
   // Slides
   slide1Tag: '🥦 Fresh Arrivals',

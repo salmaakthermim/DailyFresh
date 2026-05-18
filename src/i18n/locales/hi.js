@@ -62,6 +62,7 @@ export default {
   emailRequired: 'ईमेल या फ़ोन आवश्यक है',
   passwordRequired: 'पासवर्ड आवश्यक है',
   passwordMin: 'पासवर्ड कम से कम 6 अक्षर का होना चाहिए',
+  photoUrl: 'फ़ोटो URL (वैकल्पिक)',
 
   // Slides
   slide1Tag: '🥦 ताज़ी आमद',
