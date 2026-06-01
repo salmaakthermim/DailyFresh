@@ -55,7 +55,7 @@ export default function Navbar() {
       <nav className="flex items-center gap-4 px-4 sm:px-6 lg:px-10 py-3 sm:py-4 border-b border-gray-200 bg-white">
         {/* Logo */}
         <Link to="/" className="text-lg sm:text-xl font-bold text-gray-900 whitespace-nowrap flex-shrink-0 no-underline">
-          DailyFresh 🥦
+          DailyFresh 
         </Link>
 
         {/* Desktop Links */}

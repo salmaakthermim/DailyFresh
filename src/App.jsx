@@ -2,9 +2,11 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import Navbar from './components/Navbar';
 import Banner from './components/Banner';
+import FlashSales from './components/FlashSales';
 import Footer from './components/Footer';
 import SignUp from './pages/SignUp';
 import Login from './pages/Login';
+import ProductDetails from './pages/ProductDetails';
 import AdminRoute from './routes/AdminRoute';
 import AdminLayout from './pages/admin/AdminLayout';
 import Dashboard from './pages/admin/Dashboard';
@@ -32,9 +34,10 @@ function App() {
       <BrowserRouter>
         <Routes>
           {/* Public routes */}
-          <Route path="/" element={<MainLayout><Banner /></MainLayout>} />
+          <Route path="/" element={<MainLayout><Banner /><FlashSales /></MainLayout>} />
           <Route path="/signup" element={<MainLayout><SignUp /></MainLayout>} />
           <Route path="/login"  element={<MainLayout><Login /></MainLayout>} />
+          <Route path="/product/:id" element={<MainLayout><ProductDetails /></MainLayout>} />
 
           {/* Admin routes */}
           <Route path="/admin" element={
