@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { useCart } from '../context/CartContext';
 
 const API = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
@@ -19,6 +20,8 @@ function Stars({ rating = 4 }) {
 
 export default function ProductDetails() {
   const { id } = useParams();
+  const navigate = useNavigate();
+  const { addToCart } = useCart();
   const [product, setProduct]   = useState(null);
   const [related, setRelated]   = useState([]);
   const [loading, setLoading]   = useState(true);
@@ -56,8 +59,12 @@ export default function ProductDetails() {
     </div>
   );
 
-  // Build image gallery — use product.images array if exists, else single image
-  const images = product.images?.length ? product.images : product.image ? [product.image] : [];
+  // Build image gallery — use product.images array if exists, else duplicate single image to show thumbnails
+  const images = product.images?.length > 1 
+    ? product.images 
+    : product.image 
+      ? [product.image, product.image, product.image, product.image] 
+      : [];
 
   return (
     <div className="px-4 sm:px-6 lg:px-10 py-6 max-w-7xl mx-auto">
@@ -77,19 +84,19 @@ export default function ProductDetails() {
         {/* Left — Image Gallery */}
         <div className="flex flex-col sm:flex-row gap-6 lg:w-[60%]">
           {/* Thumbnails */}
-          {images.length > 1 && (
+          {images.length > 0 && (
             <div className="flex sm:flex-col gap-4 order-2 sm:order-1 overflow-x-auto sm:overflow-visible pb-2 sm:pb-0">
               {images.map((img, i) => (
                 <button key={i} onClick={() => setMainImg(img)}
-                  className={`w-24 h-24 sm:w-[150px] sm:h-[135px] bg-[#f5f5f5] rounded flex-shrink-0 flex items-center justify-center border-none cursor-pointer group transition-all duration-300 ${mainImg === img ? 'opacity-100 shadow-sm' : 'opacity-60 hover:opacity-100 hover:scale-105'}`}>
-                  <img src={img} alt="" className="w-full h-full p-3 object-contain group-hover:scale-110 transition-transform duration-500 ease-out" />
+                  className={`w-20 h-20 sm:w-[100px] sm:h-[100px] lg:w-[120px] lg:h-[110px] bg-[#f5f5f5] rounded flex-shrink-0 flex items-center justify-center border-none cursor-pointer group transition-all duration-300 ${mainImg === img ? 'opacity-100 shadow-sm border border-gray-300' : 'opacity-60 hover:opacity-100 hover:scale-105'}`}>
+                  <img src={img} alt="" className="w-full h-full p-2 object-contain group-hover:scale-110 transition-transform duration-500 ease-out" />
                 </button>
               ))}
             </div>
           )}
 
           {/* Main Image */}
-          <div className="flex-1 bg-[#f5f5f5] rounded order-1 sm:order-2 flex items-center justify-center min-h-[350px] sm:min-h-[500px] group cursor-zoom-in overflow-hidden relative">
+          <div className="flex-1 bg-[#f5f5f5] rounded order-1 sm:order-2 flex items-center justify-center h-[350px] sm:h-[400px] lg:h-[490px] group cursor-zoom-in overflow-hidden relative">
             {mainImg
               ? <img key={mainImg} src={mainImg} alt={product.name} className="w-full h-full p-8 object-contain transition-transform duration-700 ease-out group-hover:scale-125" style={{ animation: 'fadeIn 0.5s ease-out forwards' }} />
               : <div className="text-7xl">📦</div>
@@ -168,7 +175,7 @@ export default function ProductDetails() {
             </div>
 
             {/* Buy Now */}
-            <button className="h-10 bg-[#db4444] hover:bg-red-600 text-white px-10 rounded font-medium border-none cursor-pointer transition-colors shadow-sm text-sm">
+            <button onClick={() => { addToCart(product, qty); navigate('/cart'); }} className="h-10 bg-[#db4444] hover:bg-red-600 text-white px-10 rounded font-medium border-none cursor-pointer transition-colors shadow-sm text-sm flex items-center justify-center">
               Buy Now
             </button>
 

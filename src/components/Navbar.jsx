@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import LanguageSelector from './LanguageSelector';
 import { useAuth } from '../context/AuthContext';
+import { useCart } from '../context/CartContext';
 import useAdmin from '../hooks/useAdmin';
 
 const navLinks = [
@@ -14,6 +15,7 @@ const navLinks = [
 export default function Navbar() {
   const { t } = useTranslation();
   const { user, logout } = useAuth();
+  const { cart: cartItems } = useCart();
   const { isAdmin, adminLoading } = useAdmin();
   const location = useLocation();
   const navigate = useNavigate();
@@ -91,9 +93,16 @@ export default function Navbar() {
           className="lg:hidden text-xl text-gray-600 bg-transparent border-none cursor-pointer">🔍</button>
 
         {/* Wishlist + Cart */}
-        <div className="flex gap-3">
-          <button aria-label="Wishlist" className="text-xl text-gray-600 hover:text-red-500 transition-colors bg-transparent border-none cursor-pointer">♡</button>
-          <button aria-label="Cart" className="text-xl text-gray-600 hover:text-green-600 transition-colors bg-transparent border-none cursor-pointer">🛒</button>
+        <div className="flex gap-4 items-center">
+          <button aria-label="Wishlist" className="text-2xl text-gray-600 hover:text-red-500 transition-colors bg-transparent border-none cursor-pointer">♡</button>
+          <Link to="/cart" aria-label="Cart" className="text-xl text-gray-600 hover:text-green-600 transition-colors no-underline relative">
+            🛒
+            {cartItems?.length > 0 && (
+              <span className="absolute -top-1.5 -right-2 bg-red-500 text-white text-[10px] w-4 h-4 flex items-center justify-center rounded-full">
+                {cartItems.length}
+              </span>
+            )}
+          </Link>
         </div>
 
         {/* Auth — logged in: avatar dropdown | logged out: login/signup links */}
