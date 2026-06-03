@@ -4,6 +4,7 @@ import { CartProvider } from './context/CartContext';
 import Navbar from './components/Navbar';
 import Banner from './components/Banner';
 import FlashSales from './components/FlashSales';
+import CategoriesBrowser from './components/CategoriesBrowser';
 import Footer from './components/Footer';
 import SignUp from './pages/SignUp';
 import Login from './pages/Login';
@@ -38,7 +39,13 @@ function App() {
         <BrowserRouter>
         <Routes>
           {/* Public routes */}
-          <Route path="/" element={<MainLayout><Banner /><FlashSales /></MainLayout>} />
+          <Route path="/" element={
+            <MainLayout>
+              <Banner />
+              <FlashSales />
+              <CategoriesBrowser />
+            </MainLayout>
+          } />
           <Route path="/signup" element={<MainLayout><SignUp /></MainLayout>} />
           <Route path="/login"  element={<MainLayout><Login /></MainLayout>} />
           <Route path="/product/:id" element={<MainLayout><ProductDetails /></MainLayout>} />
