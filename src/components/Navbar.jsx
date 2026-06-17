@@ -4,7 +4,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import LanguageSelector from './LanguageSelector';
 import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
-import useAdmin from '../hooks/useAdmin';
+import useRole from '../hooks/useRole';
 
 const navLinks = [
   { key: 'home',    tKey: 'home',    to: '/' },
@@ -16,7 +16,7 @@ export default function Navbar() {
   const { t } = useTranslation();
   const { user, logout } = useAuth();
   const { cart: cartItems } = useCart();
-  const { isAdmin, adminLoading } = useAdmin();
+  const { role, roleLoading } = useRole();
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -129,10 +129,10 @@ export default function Navbar() {
                   <p className="text-xs font-medium text-gray-900 truncate">{user.displayName || 'User'}</p>
                   <p className="text-xs text-gray-400 truncate">{user.email}</p>
                 </div>
-                {(isAdmin || !adminLoading) && user && (
-                  <Link to="/admin" onClick={() => setDropOpen(false)}
+                {user && !roleLoading && (
+                  <Link to={role === 'admin' ? '/admin' : role === 'seller' ? '/seller' : '/user'} onClick={() => setDropOpen(false)}
                     className="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 no-underline transition-colors border-b border-gray-100">
-                    <span>📊</span> Dashboard
+                    <span>{role === 'admin' ? '📊' : role === 'seller' ? '🏪' : '👤'}</span> Dashboard
                   </Link>
                 )}
                 <button onClick={handleLogout}
@@ -196,10 +196,10 @@ export default function Navbar() {
             })}
             {user ? (
               <li>
-                {isAdmin && (
-                  <Link to="/admin" onClick={() => setMenuOpen(false)}
+                {!roleLoading && (
+                  <Link to={role === 'admin' ? '/admin' : role === 'seller' ? '/seller' : '/user'} onClick={() => setMenuOpen(false)}
                     className="block py-2.5 px-2 text-sm text-gray-700 no-underline hover:bg-gray-50 rounded font-medium">
-                    📊 Dashboard
+                    {role === 'admin' ? '📊' : role === 'seller' ? '🏪' : '👤'} Dashboard
                   </Link>
                 )}
                 <button onClick={() => { handleLogout(); setMenuOpen(false); }}

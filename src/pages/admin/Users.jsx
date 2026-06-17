@@ -45,7 +45,7 @@ export default function Users() {
                   <td className="px-4 py-3 font-medium text-gray-800">{u.name || '—'}</td>
                   <td className="px-4 py-3 text-gray-500">{u.email}</td>
                   <td className="px-4 py-3">
-                    <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${u.role === 'admin' ? 'bg-purple-100 text-purple-700' : 'bg-gray-100 text-gray-600'}`}>
+                    <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${u.role === 'admin' ? 'bg-purple-100 text-purple-700' : u.role === 'seller' ? 'bg-blue-100 text-blue-700' : 'bg-gray-100 text-gray-600'} uppercase`}>
                       {u.role}
                     </span>
                   </td>
@@ -56,10 +56,15 @@ export default function Users() {
                   </td>
                   <td className="px-4 py-3">
                     <div className="flex gap-2 flex-wrap">
-                      <button onClick={() => setRole(u.email, u.role === 'admin' ? 'user' : 'admin')}
-                        className={`text-xs px-3 py-1 rounded-lg border-none cursor-pointer ${u.role === 'admin' ? 'bg-gray-100 hover:bg-gray-200 text-gray-600' : 'bg-purple-50 hover:bg-purple-100 text-purple-600'}`}>
-                        {u.role === 'admin' ? 'Remove Admin' : 'Make Admin'}
-                      </button>
+                      <select 
+                        value={u.role}
+                        onChange={(e) => setRole(u.email, e.target.value)}
+                        className="text-xs px-2 py-1.5 rounded border border-gray-200 outline-none focus:border-red-400 bg-white"
+                      >
+                        <option value="user">User</option>
+                        <option value="seller">Seller</option>
+                        <option value="admin">Admin</option>
+                      </select>
                       <button onClick={() => toggleBlock(u.email, u.blocked)}
                         className={`text-xs px-3 py-1 rounded-lg border-none cursor-pointer ${u.blocked ? 'bg-green-50 hover:bg-green-100 text-green-600' : 'bg-red-50 hover:bg-red-100 text-red-600'}`}>
                         {u.blocked ? 'Unblock' : 'Block'}

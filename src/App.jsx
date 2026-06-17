@@ -2,10 +2,8 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import { CartProvider } from './context/CartContext';
 import Navbar from './components/Navbar';
-import Banner from './components/Banner';
-import FlashSales from './components/FlashSales';
-import CategoriesBrowser from './components/CategoriesBrowser';
 import Footer from './components/Footer';
+import Home from './pages/Home';
 import SignUp from './pages/SignUp';
 import Login from './pages/Login';
 import ProductDetails from './pages/ProductDetails';
@@ -20,6 +18,14 @@ import Orders from './pages/admin/Orders';
 import Users from './pages/admin/Users';
 import Coupons from './pages/admin/Coupons';
 import Banners from './pages/admin/Banners';
+import SellerRoute from './routes/SellerRoute';
+import SellerLayout from './pages/seller/SellerLayout';
+import SellerDashboard from './pages/seller/Dashboard';
+import SellerProducts from './pages/seller/MyProducts';
+import UserRoute from './routes/UserRoute';
+import UserLayout from './pages/user/UserLayout';
+import UserDashboard from './pages/user/Dashboard';
+import UserOrders from './pages/user/MyOrders';
 import './App.css';
 
 function MainLayout({ children }) {
@@ -41,9 +47,7 @@ function App() {
           {/* Public routes */}
           <Route path="/" element={
             <MainLayout>
-              <Banner />
-              <FlashSales />
-              <CategoriesBrowser />
+              <Home />
             </MainLayout>
           } />
           <Route path="/signup" element={<MainLayout><SignUp /></MainLayout>} />
@@ -63,6 +67,22 @@ function App() {
             <Route path="users"      element={<Users />} />
             <Route path="coupons"    element={<Coupons />} />
             <Route path="banners"    element={<Banners />} />
+          </Route>
+
+          {/* Seller routes */}
+          <Route path="/seller" element={
+            <SellerRoute><SellerLayout /></SellerRoute>
+          }>
+            <Route index element={<SellerDashboard />} />
+            <Route path="products" element={<SellerProducts />} />
+          </Route>
+
+          {/* User routes */}
+          <Route path="/user" element={
+            <UserRoute><UserLayout /></UserRoute>
+          }>
+            <Route index element={<UserDashboard />} />
+            <Route path="orders" element={<UserOrders />} />
           </Route>
         </Routes>
       </BrowserRouter>
