@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import { CartProvider } from './context/CartContext';
+import { WishlistProvider } from './context/WishlistContext';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
@@ -26,6 +27,7 @@ import UserRoute from './routes/UserRoute';
 import UserLayout from './pages/user/UserLayout';
 import UserDashboard from './pages/user/Dashboard';
 import UserOrders from './pages/user/MyOrders';
+import UserWishlist from './pages/user/Wishlist';
 import './App.css';
 
 function MainLayout({ children }) {
@@ -42,7 +44,8 @@ function App() {
   return (
     <AuthProvider>
       <CartProvider>
-        <BrowserRouter>
+        <WishlistProvider>
+          <BrowserRouter>
         <Routes>
           {/* Public routes */}
           <Route path="/" element={
@@ -83,9 +86,11 @@ function App() {
           }>
             <Route index element={<UserDashboard />} />
             <Route path="orders" element={<UserOrders />} />
+            <Route path="wishlist" element={<UserWishlist />} />
           </Route>
         </Routes>
-      </BrowserRouter>
+        </BrowserRouter>
+        </WishlistProvider>
       </CartProvider>
     </AuthProvider>
   );

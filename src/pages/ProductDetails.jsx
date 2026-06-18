@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useCart } from '../context/CartContext';
+import { useWishlist } from '../context/WishlistContext';
 
 const API = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
@@ -27,7 +28,7 @@ export default function ProductDetails() {
   const [loading, setLoading]   = useState(true);
   const [mainImg, setMainImg]   = useState('');
   const [qty, setQty]           = useState(1);
-  const [wishlist, setWishlist] = useState(false);
+  const { isInWishlist, addToWishlist, removeFromWishlist } = useWishlist();
 
   useEffect(() => {
     setLoading(true);
@@ -180,9 +181,15 @@ export default function ProductDetails() {
             </button>
 
             {/* Wishlist */}
-            <button onClick={() => setWishlist(w => !w)}
-              className={`w-10 h-10 rounded border flex items-center justify-center cursor-pointer transition-colors ${wishlist ? 'bg-[#db4444] border-[#db4444] text-white' : 'border-gray-300 bg-white text-gray-600 hover:border-[#db4444]'}`}>
-              <svg className="w-5 h-5" fill={wishlist ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+            <button onClick={() => {
+                if (isInWishlist(product._id)) {
+                  removeFromWishlist(product._id);
+                } else {
+                  addToWishlist(product);
+                }
+              }}
+              className={`w-10 h-10 rounded border flex items-center justify-center cursor-pointer transition-colors ${isInWishlist(product._id) ? 'bg-[#db4444] border-[#db4444] text-white' : 'border-gray-300 bg-white text-gray-600 hover:border-[#db4444]'}`}>
+              <svg className="w-5 h-5" fill={isInWishlist(product._id) ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                 <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
               </svg>
             </button>
@@ -224,9 +231,13 @@ export default function ProductDetails() {
                   {p.discount && (
                     <span className="absolute top-2 left-2 bg-red-500 text-white text-xs px-1.5 py-0.5 rounded z-10">-{p.discount}%</span>
                   )}
-                  <button onClick={e => e.preventDefault()}
-                    className="absolute top-2 right-2 w-7 h-7 bg-white rounded-full flex items-center justify-center shadow-sm border-none cursor-pointer z-10">
-                    <svg className="w-3.5 h-3.5 text-gray-500" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                  <button onClick={e => {
+                      e.preventDefault();
+                      if (isInWishlist(p._id)) removeFromWishlist(p._id);
+                      else addToWishlist(p);
+                    }}
+                    className="absolute top-2 right-2 w-7 h-7 bg-white rounded-full flex items-center justify-center shadow-sm border-none cursor-pointer z-10 transition-colors">
+                    <svg className={`w-3.5 h-3.5 ${isInWishlist(p._id) ? 'text-red-500' : 'text-gray-500 hover:text-red-500'}`} fill={isInWishlist(p._id) ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                       <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
                     </svg>
                   </button>

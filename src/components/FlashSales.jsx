@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { useWishlist } from '../context/WishlistContext';
 
 const API = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 const TARGET = Date.now() + 24 * 60 * 60 * 1000;
@@ -51,6 +52,7 @@ export default function FlashSales() {
   const [loading, setLoading]   = useState(true);
   const [hovered, setHovered]   = useState(null);
   const [scrollIdx, setScrollIdx] = useState(0);
+  const { isInWishlist, addToWishlist, removeFromWishlist } = useWishlist();
   const visible = 4;
 
   useEffect(() => {
@@ -124,8 +126,13 @@ export default function FlashSales() {
                 )}
 
                 <div className="absolute top-3 right-3 flex flex-col gap-2 z-10">
-                  <button className="w-7 h-7 bg-white rounded-full flex items-center justify-center shadow-sm hover:bg-red-50 border-none cursor-pointer">
-                    <svg className="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                  <button onClick={(e) => {
+                      e.preventDefault();
+                      if (isInWishlist(p._id)) removeFromWishlist(p._id);
+                      else addToWishlist(p);
+                    }}
+                    className="w-7 h-7 bg-white rounded-full flex items-center justify-center shadow-sm hover:bg-red-50 border-none cursor-pointer">
+                    <svg className={`w-4 h-4 transition-colors ${isInWishlist(p._id) ? 'text-red-500' : 'text-gray-600 hover:text-red-500'}`} fill={isInWishlist(p._id) ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                       <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
                     </svg>
                   </button>
