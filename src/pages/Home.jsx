@@ -4,6 +4,7 @@ import FlashSales from '../components/FlashSales';
 import CategoriesBrowser from '../components/CategoriesBrowser';
 import FeaturedProducts from '../components/FeaturedProducts';
 import TrendingProducts from '../components/TrendingProducts';
+import NewArrival from '../components/NewArrival';
 import CustomerReviews from '../components/CustomerReviews';
 import Newsletter from '../components/Newsletter';
 
@@ -24,13 +25,16 @@ export default function Home() {
       {/* 4. Trending Products */}
       <TrendingProducts />
 
-      {/* 5. Discount Section (Flash Sales) */}
+      {/* 5. New Arrival */}
+      <NewArrival />
+
+      {/* 6. Discount Section (Flash Sales) */}
       <FlashSales />
 
-      {/* 6. Customer Reviews */}
+      {/* 7. Customer Reviews */}
       <CustomerReviews />
 
-      {/* 7. Newsletter */}
+      {/* 8. Newsletter */}
       <Newsletter />
     </div>
   );

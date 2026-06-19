@@ -1,15 +1,16 @@
 import { useState } from 'react';
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
+import { LayoutDashboard, Package, FolderTree, ShoppingCart, Users, Ticket, Image } from 'lucide-react';
 
 const menuItems = [
-  { to: '/admin',                  label: 'Dashboard',    icon: '📊', end: true },
-  { to: '/admin/products',         label: 'Products',     icon: '📦' },
-  { to: '/admin/categories',       label: 'Categories',   icon: '🗂️' },
-  { to: '/admin/orders',           label: 'Orders',       icon: '🛒' },
-  { to: '/admin/users',            label: 'Users',        icon: '👥' },
-  { to: '/admin/coupons',          label: 'Coupons',      icon: '🎟️' },
-  { to: '/admin/banners',          label: 'Banners',      icon: '🖼️' },
+  { to: '/admin',                  label: 'Dashboard',    icon: <LayoutDashboard size={20} />, end: true },
+  { to: '/admin/products',         label: 'Products',     icon: <Package size={20} /> },
+  { to: '/admin/categories',       label: 'Categories',   icon: <FolderTree size={20} /> },
+  { to: '/admin/orders',           label: 'Orders',       icon: <ShoppingCart size={20} /> },
+  { to: '/admin/users',            label: 'Users',        icon: <Users size={20} /> },
+  { to: '/admin/coupons',          label: 'Coupons',      icon: <Ticket size={20} /> },
+  { to: '/admin/banners',          label: 'Banners',      icon: <Image size={20} /> },
 ];
 
 export default function AdminLayout() {

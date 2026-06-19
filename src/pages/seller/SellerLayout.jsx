@@ -1,15 +1,16 @@
 import { NavLink, Outlet } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../context/AuthContext';
+import { LayoutDashboard, Package, Home, LogOut } from 'lucide-react';
 
 export default function SellerLayout() {
   const { t } = useTranslation();
   const { user, logout } = useAuth();
 
   const links = [
-    { to: "/seller", label: "Dashboard", end: true },
-    { to: "/seller/products", label: "My Products" },
-    { to: "/", label: "Back to Home" },
+    { to: "/seller", label: "Dashboard", icon: <LayoutDashboard size={20} />, end: true },
+    { to: "/seller/products", label: "My Products", icon: <Package size={20} /> },
+    { to: "/", label: "Back to Home", icon: <Home size={20} /> },
   ];
 
   return (
@@ -37,18 +38,20 @@ export default function SellerLayout() {
               to={l.to}
               end={l.end}
               className={({ isActive }) => 
-                `block px-4 py-2.5 rounded-lg text-sm font-medium transition-colors ${
+                `flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors ${
                   isActive ? 'bg-blue-50 text-blue-600' : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
                 }`
               }
             >
-              {l.label}
+              {l.icon}
+              <span className="truncate">{l.label}</span>
             </NavLink>
           ))}
         </nav>
         
         <div className="p-4 border-t border-gray-100">
-          <button onClick={logout} className="w-full text-left px-4 py-2.5 text-sm font-medium text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors border-none cursor-pointer">
+          <button onClick={logout} className="flex items-center gap-3 w-full text-left px-4 py-2.5 text-sm font-medium text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors border-none cursor-pointer">
+            <LogOut size={20} />
             Sign Out
           </button>
         </div>

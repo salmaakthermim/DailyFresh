@@ -1,15 +1,16 @@
 import { NavLink, Outlet } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../context/AuthContext';
+import { LayoutDashboard, ShoppingBag, Home, LogOut } from 'lucide-react';
 
 export default function UserLayout() {
   const { t } = useTranslation();
   const { user, logout } = useAuth();
 
   const links = [
-    { to: "/user", label: "Dashboard", end: true },
-    { to: "/user/orders", label: "My Orders" },
-    { to: "/", label: "Back to Home" },
+    { to: "/user", label: "Dashboard", icon: <LayoutDashboard size={20} />, end: true },
+    { to: "/user/orders", label: "My Orders", icon: <ShoppingBag size={20} /> },
+    { to: "/", label: "Back to Home", icon: <Home size={20} /> },
   ];
 
   return (
@@ -37,18 +38,20 @@ export default function UserLayout() {
               to={l.to}
               end={l.end}
               className={({ isActive }) => 
-                `block px-4 py-2.5 rounded-lg text-sm font-medium transition-colors ${
+                `flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors ${
                   isActive ? 'bg-red-50 text-red-600' : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
                 }`
               }
             >
-              {l.label}
+              {l.icon}
+              <span className="truncate">{l.label}</span>
             </NavLink>
           ))}
         </nav>
         
         <div className="p-4 border-t border-gray-100">
-          <button onClick={logout} className="w-full text-left px-4 py-2.5 text-sm font-medium text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors border-none cursor-pointer">
+          <button onClick={logout} className="flex items-center gap-3 w-full text-left px-4 py-2.5 text-sm font-medium text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors border-none cursor-pointer">
+            <LogOut size={20} />
             Sign Out
           </button>
         </div>
